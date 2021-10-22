@@ -702,10 +702,10 @@ public class RestService  implements IService {
     	position.setStatus(false);
 		positionRepository.save(position);
     	SoldeDebuterJournee solde =soldeDebuterJourneeRepository.findByIdUAndStatus(id,1).get(0);
-    	Majournee solde1 =maJourneeRepository.findByIdUAndStatus(id,1).get(0);
+    	Majournee solde1 =maJourneeRepository.findByIdSoldeDebuterJournee(solde.getId());
         solde.setCloturer(con);
         solde1.setCloturer(con);
-        updateSoldeDebuterJournee(solde.getId(),solde);
+        updateSoldeDebuterJournee(id,solde);
         updateMajournee(solde1.getId(),solde1);
         mettreTransactionAzero(id) ;
     	return con;
@@ -1454,7 +1454,7 @@ public class RestService  implements IService {
     
     private void mettreTransactionAzero(int idU) {
     	SoldeDebuterJournee solde =soldeDebuterJourneeRepository.findByIdUAndStatus(idU,1).get(0);
-    	Majournee jour = maJourneeRepository.findByIdUAndStatus(idU,1).get(0);
+    	Majournee jour = maJourneeRepository.findByIdSoldeDebuterJournee(solde.getId());
     	List<Transaction> listes = listeTansactionParCassier(idU);
     	
     	for (Transaction transaction : listes) {
@@ -1465,7 +1465,7 @@ public class RestService  implements IService {
 		}
 		solde.setStatus(0);
 	    jour.setStatus(0);
-		updateSoldeDebuterJournee(solde.getId(), solde);
+		updateSoldeDebuterJournee(idU, solde);
 		updateMajournee(jour.getId(), jour);
 		
     }
