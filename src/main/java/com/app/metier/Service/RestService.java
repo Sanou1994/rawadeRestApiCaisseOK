@@ -341,7 +341,7 @@ public class RestService  implements IService {
   			}
   	    	
     	}
-    	updateSoldeDebuterJournee(soldes.getId(),soldes);
+    	updateSoldeDebuterJournee(id_user,soldes);
     	
         transactionRepository.save(user);
     }
@@ -537,7 +537,7 @@ public class RestService  implements IService {
     		calculeActualiser(soldes,-admin.getMontant(),admin.getOperateur());
     	}
     	
-        updateSoldeDebuterJournee(soldes.getId(),soldes);
+        updateSoldeDebuterJournee(soldes.getIdU(),soldes);
         
     	
 		admin.setOperateur(ad.getOperateur());
@@ -670,7 +670,7 @@ public class RestService  implements IService {
  					break;
  				}
     	}
-        updateSoldeDebuterJournee(solde.getId(),solde);
+        updateSoldeDebuterJournee(solde.getIdU(),solde);
     	transactionRepository.delete(user);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
@@ -1040,7 +1040,7 @@ public class RestService  implements IService {
 				default:
 					break;
 				}
-         updateSoldeDebuterJournee(solde.getId(),solde);
+         updateSoldeDebuterJournee(solde.getIdU(),solde);
     	
     }
     public void calculeActualiser(SoldeDebuterJournee solde,double ancienMontant,String nomOp) {
@@ -1178,7 +1178,7 @@ public class RestService  implements IService {
 				default:
 					break;
 				}
-          updateSoldeDebuterJournee(solde.getId(),solde);
+          updateSoldeDebuterJournee(solde.getIdU(),solde);
 		}	
     
     private void update(int idU,String operateur) {
@@ -1403,7 +1403,7 @@ public class RestService  implements IService {
               default:
             	  break;
 		           	   }
-    	   updateSoldeDebuterJournee(solde.getId(),solde);
+    	   updateSoldeDebuterJournee(solde.getIdU(),solde);
 	}
     
     private void updateDebuter(SoldeDebuterJournee solde_ancien,SoldeDebuterJournee solde_nouveau) {
