@@ -701,6 +701,9 @@ public class RestService  implements IService {
     	position.setSoldeJournal(1000);
     	position.setStatus(false);
 		positionRepository.save(position);
+    	List<SoldeCloturerJournee> soldeCloturerJournees =soldeCloturerJourneeRepository.findByIdUAndDateAndStatus(id, formater.format(aujourdhui),1);
+    	soldeCloturerJournees.get(0).setStatus(0);
+    	soldeCloturerJourneeRepository.save(soldeCloturerJournees.get(0));
     	SoldeDebuterJournee solde =soldeDebuterJourneeRepository.findByIdUAndStatus(id,1).get(0);
     	Majournee solde1 =maJourneeRepository.findByIdSoldeDebuterJournee(solde.getId());
         solde.setCloturer(con);
@@ -1716,7 +1719,6 @@ public class RestService  implements IService {
 		// TODO Auto-generated method stub
 		return soldeCloturerJourneeRepository.findAll();
 	}
-
 	@Override
 	public SoldeCloturerJournee getSoldeCloturerJourneeById(int userId) {
 		return soldeCloturerJourneeRepository.findById(userId);
@@ -1772,7 +1774,7 @@ public class RestService  implements IService {
 	@Override
 	public List<SoldeCloturerJournee> getSoldeCloturerJourneeByIdUAndDate(int id, String date) {
 		// TODO Auto-generated method stub
-		return soldeCloturerJourneeRepository.findByIdUAndDate(id, date);
+		return soldeCloturerJourneeRepository.findByIdUAndDateAndStatus(id, date,1);
 	}
 
 	@Override

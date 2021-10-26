@@ -10,5 +10,5 @@ public interface DaoSoldeCloturerJournee extends JpaRepository<SoldeCloturerJour
 	SoldeCloturerJournee findByIdU(int id);
 	SoldeCloturerJournee findById(int userId);
 	List<SoldeCloturerJournee> findByIdUAndStatus(int userId,int idU);
-	List<SoldeCloturerJournee> findByIdUAndDate(int id,String date);
+	List<SoldeCloturerJournee> findByIdUAndDateAndStatus(int id,String date,int status);
 }
