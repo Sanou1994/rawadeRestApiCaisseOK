@@ -10,5 +10,5 @@ public interface DaoSoleReel extends JpaRepository<Soldereel,Integer>{
 	Soldereel findByIdU(int id);
 	Soldereel findById(int userId);
 	List<Soldereel> findByIdUAndStatus(int userId,int idU);
-	List<Soldereel> findByIdUAndDate(int id,String date);
+	List<Soldereel> findByIdUAndDateAndStatus(int id,String date,int status);
 }
