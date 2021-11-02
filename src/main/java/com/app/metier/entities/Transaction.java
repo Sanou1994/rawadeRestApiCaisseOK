@@ -33,9 +33,11 @@ public class Transaction implements Serializable {
 	private int idU;
 	private String date;
 	private int status=1;
+	private int idCopie;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
     
     
 	public Transaction() {
@@ -45,7 +47,7 @@ public class Transaction implements Serializable {
 
 	public Transaction(String operateur, String operation, double decaissement, double commission, double encaissement,
 			double frais, double taxe, double montant, double surplux, String numero, String sens, String reference,
-			String credit, String debit, int idU, String date,int status) {
+			String credit, String debit, int idU, String date,int status,int idCopie) {
 		super();
 		this.operateur = operateur;
 		this.operation = operation;
@@ -64,12 +66,13 @@ public class Transaction implements Serializable {
 		this.idU = idU;
 		this.date = date;
 		this.status = status;
+		this.idCopie = idCopie;
 	}
 
 
 	public Transaction(String operateur, String operation, double decaissement, double commission, double encaissement,
 			double frais, double taxe, double montant, double surplux, String numero, String sens, String reference,
-			String credit, String debit, int idU, String date,int status,int id) {
+			String credit, String debit, int idU, String date,int status,int idCopie,int id) {
 		super();
 		this.operateur = operateur;
 		this.operation = operation;
@@ -88,12 +91,23 @@ public class Transaction implements Serializable {
 		this.idU = idU;
 		this.date = date;
 		this.status = status;
+		this.idCopie = idCopie;
 		this.id = id;
 	}
 
 
 	public String getOperateur() {
 		return operateur;
+	}
+
+
+	public int getIdCopie() {
+		return idCopie;
+	}
+
+
+	public void setIdCopie(int idCopie) {
+		this.idCopie = idCopie;
 	}
 
 

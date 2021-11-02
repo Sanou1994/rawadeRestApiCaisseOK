@@ -343,7 +343,9 @@ public class RestService  implements IService {
     	}
     	updateSoldeDebuterJournee(id_user,soldes);
     	
-        transactionRepository.save(user);
+        Transaction transactionCreate =transactionRepository.save(user);
+        transactionCreate.setIdCopie(transactionCreate.getId());
+        transactionRepository.save(transactionCreate);
     }
     
   
@@ -539,7 +541,7 @@ public class RestService  implements IService {
     	
         updateSoldeDebuterJournee(soldes.getIdU(),soldes);
         
-    	
+    	admin.setId(userId);
 		admin.setOperateur(ad.getOperateur());
 		admin.setOperation(ad.getOperation());
 		admin.setDecaissement(ad.getDecaissement());
@@ -984,10 +986,9 @@ public class RestService  implements IService {
     	
     	return listeTri;
     }
-   
     public List<Transaction>listeTansactionParCassier( int id_caissier){
-    	
-    	return transactionRepository.findByIdUAndDateAndStatus(id_caissier, formater.format(aujourdhui),1);
+	   List<Transaction> listes =transactionRepository.findByIdUAndDateAndStatusOrderByIdCopieAsc(id_caissier, formater.format(aujourdhui),1);
+    	return listes;
     }
     
     public List<Transaction>listeHistorique( history user){
@@ -1620,7 +1621,7 @@ public class RestService  implements IService {
 
 	@Override
 	public SoldeDebuterJournee getTotalFraisOperateur(int userId) {
-		 List<Transaction>listes = transactionRepository.findByIdUAndDateAndStatus(userId,formater.format(aujourdhui),1);
+		 List<Transaction>listes = transactionRepository.findByIdUAndDateAndStatusOrderByIdCopieAsc(userId,formater.format(aujourdhui),1);
 		 SoldeDebuterJournee solde = new SoldeDebuterJournee();
 		 for (Transaction transaction : listes) {
 				 switch (transaction.getOperateur()) {

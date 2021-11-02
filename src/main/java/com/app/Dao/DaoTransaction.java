@@ -10,7 +10,7 @@ import com.app.metier.entities.Transaction;
 @Repository
 public interface DaoTransaction extends JpaRepository<Transaction,Integer>{
 	Transaction findById(int userId);
-	List<Transaction> findByIdUAndDateAndStatus(int idU,String date,int status);
+	List<Transaction> findByIdUAndDateAndStatusOrderByIdCopieAsc(int idU,String date,int status);
 	List<Transaction> findByDateAndOperateurAndSensAndIdU(String date,String operateur,String sens,int id);
 	List<Transaction> findByOperateurAndDateAndIdUAndSensAndStatus(String operateur,String operation,int id,String date,int id1);
 	List<Transaction> findByOperateurAndDateAndIdUAndStatus(String operation,String date,int id,int id1);
